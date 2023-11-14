@@ -10,8 +10,16 @@ public class TestCase {
 
     @BeforeEach
     public void beforeEach() {
+        eyes = new Eyes();
+        eyes.setApiKey(System.getenv(name¨APPLITOOLS_API_KEY¨));
         driver = WebDriverManager.chromedriver().create();
-    }
+    eyes.open(
+        driver,
+        appName:¨My First Test¨,
+        testInfo.getTestmethod().getName(),
+        new RectangleSize(width:1000, height:600)
+        );
+    }    
     @Test
     public void myTestCase() {
         driver.get("https://applitools.com/helloworld/");
@@ -35,6 +43,7 @@ public class TestCase {
         Assertions.assertEquals(titleD.isDisplayed(), true);
         Assertions.assertEquals(titleD.getText(), "D");
         Assertions.assertEquals(titleD.getCssValue("color"), "rgba(70, 0, 255, 1)");`
+        eyes.check(Target.window()); 
     }
 
     @AfterEach
